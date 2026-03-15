@@ -60,11 +60,26 @@ logger = logging.getLogger(__name__)
 # ── CORS ───────────────────────────────────────────────────────────────────────
 # Only allow the frontend origin(s) from the environment variable.
 allowed_origins_raw = os.getenv("ALLOWED_ORIGINS", "http://localhost:3000,http://127.0.0.1:3000")
-allowed_origins = [o.strip() for o in allowed_origins_raw.split(",") if o.strip()]
+if allowed_origins_raw == "*":
+    allowed_origins = ["*"]
+else:
+    allowed_origins = [o.strip() for o in allowed_origins_raw.split(",") if o.strip()]
 
 # Log allowed origins on startup for easier troubleshooting
 logger.info("CORS policy: allowing origins: %s", allowed_origins)
 print(f"CORS POLICY: {allowed_origins}") # Print for Render logs visibility
+
+@app.middleware("http")
+async def log_request_origin(request: Request, call_next):
+    """
+    Middleware to log the Origin of every request.
+    This helps us see exactly which URL is being blocked by CORS.
+    """
+    origin = request.headers.get("origin")
+    if origin:
+        print(f"DEBUG: Request from Origin: {origin}")
+    response = await call_next(request)
+    return response
 
 app.add_middleware(
     CORSMiddleware,
