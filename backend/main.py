@@ -56,7 +56,7 @@ app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 # ── CORS ───────────────────────────────────────────────────────────────────────
 # Only allow the frontend origin(s) from the environment variable.
-allowed_origins_raw = os.getenv("ALLOWED_ORIGINS", "http://localhost:3000")
+allowed_origins_raw = os.getenv("ALLOWED_ORIGINS", "http://localhost:3000,http://127.0.0.1:3000")
 allowed_origins = [o.strip() for o in allowed_origins_raw.split(",") if o.strip()]
 
 # Log allowed origins on startup for easier troubleshooting
@@ -71,7 +71,22 @@ app.add_middleware(
 )
 
 
-# ── Global exception handler ───────────────────────────────────────────────────
+# ── Global exception handlers ──────────────────────────────────────────────────
+from fastapi.exceptions import RequestValidationError
+
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request: Request, exc: RequestValidationError):
+    """
+    Detailed logger for validation errors.
+    Print the error to the terminal so we can see what's wrong with the request payload.
+    """
+    print(f"ERROR: Validation failed for {request.url}: {exc.errors()}")
+    print(f"PAYLOAD: {await request.body()}")
+    return JSONResponse(
+        status_code=400,
+        content={"error": "Validation error", "detail": exc.errors()},
+    )
+
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):
     """
