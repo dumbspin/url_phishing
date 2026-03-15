@@ -4,7 +4,6 @@ import { useState } from "react"
 import { MeshGradient, DotOrbit } from "@paper-design/shaders-react"
 
 export default function ShaderDemo() {
-  const [intensity, setIntensity] = useState(1.5)
   const [speed, setSpeed] = useState(1.0)
   const [activeEffect, setActiveEffect] = useState("mesh")
   const [copied, setCopied] = useState(false)
@@ -26,7 +25,6 @@ export default function ShaderDemo() {
           className="w-full h-full absolute inset-0"
           colors={["#eeeaf8", "#dbd4f5", "#f5f3ff", "#ffffff"]}
           speed={speed}
-          backgroundColor="#eeeaf8"
         />
       )}
 
@@ -34,10 +32,9 @@ export default function ShaderDemo() {
         <div className="w-full h-full absolute inset-0 bg-[#eeeaf8]">
           <DotOrbit
             className="w-full h-full"
-            dotColor="#5b5bd6"
-            orbitColor="#d8d3f0"
+            colors={["#5b5bd6"]}
+            colorBack="#d8d3f0"
             speed={speed}
-            intensity={intensity}
           />
         </div>
       )}
@@ -48,16 +45,13 @@ export default function ShaderDemo() {
             className="w-full h-full absolute inset-0"
             colors={["#eeeaf8", "#dbd4f5", "#f5f3ff", "#ffffff"]}
             speed={speed * 0.5}
-            wireframe="true"
-            backgroundColor="#eeeaf8"
           />
           <div className="w-full h-full absolute inset-0 opacity-60">
             <DotOrbit
               className="w-full h-full"
-              dotColor="#5b5bd6"
-              orbitColor="#d8d3f0"
+              colors={["#5b5bd6"]}
+              colorBack="#d8d3f0"
               speed={speed * 1.5}
-              intensity={intensity * 0.8}
             />
           </div>
         </>
