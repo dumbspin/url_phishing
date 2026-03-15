@@ -58,9 +58,16 @@ app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 logger = logging.getLogger(__name__)
 
 # ── CORS ───────────────────────────────────────────────────────────────────────
-# Only allow the frontend origin(s) from the environment variable.
-allowed_origins_raw = os.getenv("ALLOWED_ORIGINS", "http://localhost:3000,http://127.0.0.1:3000")
-if allowed_origins_raw == "*":
+# Allow the frontend origin(s).  The Vercel production URL is included by
+# default so the deployed backend works out-of-the-box even when the Render
+# ALLOWED_ORIGINS env var hasn't been configured yet.
+_DEFAULT_ORIGINS = ",".join([
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "https://url-phishing-ten.vercel.app",
+])
+allowed_origins_raw = os.getenv("ALLOWED_ORIGINS", _DEFAULT_ORIGINS)
+if allowed_origins_raw.strip() == "*":
     allowed_origins = ["*"]
 else:
     allowed_origins = [o.strip() for o in allowed_origins_raw.split(",") if o.strip()]
