@@ -7,7 +7,8 @@ export function middleware(request: NextRequest) {
 
   // If on specific Vercel production hostname and at the root, redirect to /scanner
   // This satisfies the requirement: "i dont want anything else on vercel except the scanner"
-  if (hostname === 'url-phishing-ten.vercel.app' && url.pathname === '/') {
+  // If on Vercel production and at the root, redirect to /scanner
+  if (hostname && (hostname.includes('vercel.app') || hostname === 'url-phishing-ten.vercel.app') && url.pathname === '/') {
     url.pathname = '/scanner';
     return NextResponse.redirect(url);
   }
