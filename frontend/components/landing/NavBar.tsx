@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
@@ -8,6 +8,13 @@ interface NavBarProps {
 }
 
 const NavBar: React.FC<NavBarProps> = () => {
+  const [isLocal, setIsLocal] = useState(true);
+
+  useEffect(() => {
+    const host = window.location.hostname;
+    setIsLocal(host === "localhost" || host === "127.0.0.1");
+  }, []);
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -35,8 +42,8 @@ const NavBar: React.FC<NavBarProps> = () => {
           <Link
             key={item}
             href={
-              item === "HOME" ? "/" : 
-              item === "SCANNER" ? "https://url-phishing-ten.vercel.app/scanner" : 
+              item === "HOME" ? (isLocal ? "/" : "/?view=home") :
+              item === "SCANNER" ? "https://url-phishing-ten.vercel.app/" : 
               `/${item.toLowerCase()}`
             }
             target={item === "SCANNER" ? "_blank" : undefined}
