@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 // Components
@@ -13,6 +13,14 @@ import ReportSection from "@/components/landing/ReportSection";
 import FooterSection from "@/components/landing/FooterSection";
 
 export default function LandingPage() {
+  const [isLocal, setIsLocal] = useState(true);
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    const host = window.location.hostname;
+    setIsLocal(host === "localhost" || host === "127.0.0.1");
+    setReady(true);
+  }, []);
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -21,6 +29,32 @@ export default function LandingPage() {
     }
   };
 
+  // Blank screen until we know where we are (prevents flash of full page on Vercel)
+  if (!ready) return null;
+
+  // ── VERCEL: Scanner-only mode ──
+  if (!isLocal) {
+    return (
+      <motion.main
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.4 }}
+        className="relative flex flex-col w-full min-h-screen"
+      >
+        <NavBar />
+        <div className="pt-8">
+          <ScanSection />
+        </div>
+        <footer className="mt-auto py-10 text-center border-t border-white/5">
+          <p className="text-muted text-xs font-medium">
+            © {new Date().getFullYear()} Cypher Collective — Dedicated Scanner
+          </p>
+        </footer>
+      </motion.main>
+    );
+  }
+
+  // ── LOCALHOST: Full landing page ──
   return (
     <motion.main
       initial={{ opacity: 0 }}
@@ -28,33 +62,14 @@ export default function LandingPage() {
       transition={{ duration: 0.4 }}
       className="relative flex flex-col w-full"
     >
-      {/* Navigation Layer */}
       <NavBar />
-
-      {/* Hero Section */}
-      <HeroSection 
-        onScanClick={() => scrollToSection("scanner")} 
-      />
-
-      {/* Trust & Verification Feed */}
+      <HeroSection onScanClick={() => scrollToSection("scanner")} />
       <TrustLogos />
-
-      {/* Core Interaction - Link Scanner */}
       <ScanSection />
-
-      {/* Technical Deep Dive */}
       <HowItWorksSection />
-
-      {/* Geographical Threat Intelligence */}
       <ZonePreviewSection />
-
-      {/* Community Reporting Engine */}
       <ReportSection />
-
-      {/* Global Footer */}
       <FooterSection />
-
-      
     </motion.main>
   );
 }
