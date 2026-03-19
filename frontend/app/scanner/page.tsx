@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
-import NavBar from "@/components/landing/NavBar";
-import ScanSection from "@/components/landing/ScanSection";
+import NavBar from "../../components/landing/NavBar";
+import ScanSection from "../../components/landing/ScanSection";
 
 export default function ScannerPage() {
   return (
