@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 // Components
@@ -13,6 +13,13 @@ import ReportSection from "@/components/landing/ReportSection";
 import FooterSection from "@/components/landing/FooterSection";
 
 export default function LandingPage() {
+  const [isVercel, setIsVercel] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setIsVercel(window.location.hostname.includes("vercel.app"));
+    }
+  }, []);
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -32,27 +39,31 @@ export default function LandingPage() {
       <NavBar />
 
       {/* Hero Section */}
-      <HeroSection 
-        onScanClick={() => scrollToSection("scanner")} 
-      />
+      {!isVercel && (
+        <HeroSection 
+          onScanClick={() => scrollToSection("scanner")} 
+        />
+      )}
 
       {/* Trust & Verification Feed */}
-      <TrustLogos />
+      {!isVercel && <TrustLogos />}
 
       {/* Core Interaction - Link Scanner */}
-      <ScanSection />
+      <div className={isVercel ? "pt-20" : ""}>
+        <ScanSection />
+      </div>
 
       {/* Technical Deep Dive */}
-      <HowItWorksSection />
+      {!isVercel && <HowItWorksSection />}
 
       {/* Geographical Threat Intelligence */}
-      <ZonePreviewSection />
+      {!isVercel && <ZonePreviewSection />}
 
       {/* Community Reporting Engine */}
-      <ReportSection />
+      {!isVercel && <ReportSection />}
 
       {/* Global Footer */}
-      <FooterSection />
+      {!isVercel && <FooterSection />}
 
       
     </motion.main>
