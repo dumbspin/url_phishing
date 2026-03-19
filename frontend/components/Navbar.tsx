@@ -16,7 +16,7 @@ export function Navbar() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
             <div className="text-accent transition-transform group-hover:scale-110">
-              <Shield className="w-5 h-5" strokeWidth={2} fill="rgba(91,91,214,0.15)" />
+              <Shield className="w-5 h-5" strokeWidth={2} fill="rgba(252,163,17,0.15)" />
             </div>
             <span className="font-bold text-base text-text-primary">
               Cy<span className="text-accent">pher</span>
@@ -25,18 +25,18 @@ export function Navbar() {
 
           {/* Center nav pill */}
           <nav
-            className="hidden sm:flex items-center gap-1 text-sm bg-white/70 backdrop-blur-md border border-border-solid rounded-full px-2 py-1.5 shadow-navbar"
+            className="hidden sm:flex items-center gap-1 text-sm bg-bg-deep/70 backdrop-blur-md border border-border-solid rounded-full px-2 py-1.5 shadow-navbar"
             aria-label="Main navigation"
           >
             <Link
               href="/"
-              className="px-4 py-1.5 rounded-full font-medium text-text-primary hover:bg-accent/10 hover:text-accent transition-all"
+              className="px-4 py-1.5 rounded-full font-medium text-text-primary hover:bg-accent/15 hover:text-accent transition-all"
             >
               Scanner
             </Link>
             <button
               onClick={() => setShowAdvisories(true)}
-              className="px-4 py-1.5 rounded-full font-medium text-text-muted hover:bg-accent/10 hover:text-accent flex items-center gap-1.5 transition-all"
+              className="px-4 py-1.5 rounded-full font-medium text-text-muted hover:bg-accent/15 hover:text-accent flex items-center gap-1.5 transition-all"
             >
               <Bell className="w-3.5 h-3.5" />
               Advisories
@@ -45,7 +45,7 @@ export function Navbar() {
               href="https://github.com/dumbspin/url_phishing"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-1.5 rounded-full font-medium text-text-muted hover:bg-accent/10 hover:text-accent flex items-center gap-1.5 transition-all"
+              className="px-4 py-1.5 rounded-full font-medium text-text-muted hover:bg-accent/15 hover:text-accent flex items-center gap-1.5 transition-all"
             >
               <Github className="w-3.5 h-3.5" />
               GitHub

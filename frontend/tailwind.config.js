@@ -8,19 +8,19 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: "#eeeaf8",
-        "bg-deep": "#dbd4f5",
-        surface: "rgba(255,255,255,0.72)",
-        "surface-solid": "#f5f3ff",
-        accent: "#5b5bd6",
-        "accent-light": "#7c7cf0",
+        background: "#000000",
+        "bg-deep": "#14213d",
+        surface: "rgba(20,33,61,0.6)",
+        "surface-solid": "#14213d",
+        accent: "#fca311",
+        "accent-light": "#fdba4a",
         danger: "#e53e3e",
         warning: "#dd6b20",
         success: "#38a169",
-        "text-primary": "#1a1a3e",
-        "text-muted": "#6b6b8f",
-        border: "rgba(91,91,214,0.15)",
-        "border-solid": "#d8d3f0",
+        "text-primary": "#ffffff",
+        "text-muted": "#e5e5e5",
+        border: "rgba(229,229,229,0.12)",
+        "border-solid": "rgba(229,229,229,0.2)",
       },
       fontFamily: {
         sans: ["Inter", "system-ui", "sans-serif"],
@@ -30,7 +30,7 @@ module.exports = {
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "hero-glow":
-          "radial-gradient(ellipse 90% 80% at 50% 10%, #c8c3f0 0%, #ddd8f8 30%, #eeeaf8 70%, transparent 100%)",
+          "radial-gradient(ellipse 90% 80% at 50% 10%, #14213d 0%, #0a1628 30%, #000000 70%, transparent 100%)",
       },
       animation: {
         "pulse-slow": "pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite",
@@ -38,11 +38,11 @@ module.exports = {
         "float": "float-blob 12s ease-in-out infinite",
       },
       boxShadow: {
-        "glow-accent": "0 0 20px rgba(91,91,214,0.35)",
+        "glow-accent": "0 0 20px rgba(252,163,17,0.35)",
         "glow-danger": "0 0 20px rgba(229,62,62,0.35)",
         "glow-success": "0 0 20px rgba(56,161,105,0.35)",
-        "card": "0 4px 32px rgba(91,91,214,0.08), 0 1px 4px rgba(0,0,0,0.04)",
-        "navbar": "0 2px 24px rgba(91,91,214,0.08)",
+        "card": "0 4px 32px rgba(0,0,0,0.3), 0 1px 4px rgba(0,0,0,0.2)",
+        "navbar": "0 2px 24px rgba(0,0,0,0.3)",
       },
     },
   },

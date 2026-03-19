@@ -23,17 +23,17 @@ export default function ShaderDemo() {
       {activeEffect === "mesh" && (
         <MeshGradient
           className="w-full h-full absolute inset-0"
-          colors={["#eeeaf8", "#dbd4f5", "#f5f3ff", "#ffffff"]}
+          colors={["#000000", "#14213d", "#3d2a08", "#1a1a1a"]}
           speed={speed}
         />
       )}
 
       {activeEffect === "dots" && (
-        <div className="w-full h-full absolute inset-0 bg-[#eeeaf8]">
+        <div className="w-full h-full absolute inset-0 bg-[#000000]">
           <DotOrbit
             className="w-full h-full"
-            colors={["#5b5bd6"]}
-            colorBack="#d8d3f0"
+            colors={["#fca311"]}
+            colorBack="#14213d"
             speed={speed}
           />
         </div>
@@ -43,14 +43,14 @@ export default function ShaderDemo() {
         <>
           <MeshGradient
             className="w-full h-full absolute inset-0"
-            colors={["#eeeaf8", "#dbd4f5", "#f5f3ff", "#ffffff"]}
+            colors={["#000000", "#14213d", "#3d2a08", "#1a1a1a"]}
             speed={speed * 0.5}
           />
           <div className="w-full h-full absolute inset-0 opacity-60">
             <DotOrbit
               className="w-full h-full"
-              colors={["#5b5bd6"]}
-              colorBack="#d8d3f0"
+              colors={["#fca311"]}
+              colorBack="#14213d"
               speed={speed * 1.5}
             />
           </div>

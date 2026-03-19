@@ -62,7 +62,7 @@ export default function RiskMeter({ score }) {
   }, [score]);
 
   const colour = scoreToHex(score);
-  const remainColour = "rgba(30,45,69,0.6)";
+  const remainColour = "rgba(20,33,61,0.6)";
 
   const data = {
     datasets: [
