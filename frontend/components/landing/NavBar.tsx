@@ -36,9 +36,11 @@ const NavBar: React.FC<NavBarProps> = () => {
             key={item}
             href={
               item === "HOME" ? "/" : 
-              item === "SCANNER" ? "#scanner" : 
+              item === "SCANNER" ? "https://url-phishing-ten.vercel.app/scanner" : 
               `/${item.toLowerCase()}`
             }
+            target={item === "SCANNER" ? "_blank" : undefined}
+            rel={item === "SCANNER" ? "noopener noreferrer" : undefined}
             className={`text-sm font-medium px-4 py-2 rounded-lg transition-all duration-200 ${
               item === "HOME" ? "text-accent bg-surface2/50" : "text-muted hover:bg-surface2 hover:text-text"
             }`}
