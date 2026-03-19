@@ -64,25 +64,15 @@ def _format_date(dt) -> Optional[str]:
     Safely format a date field from whois, which may be a list or single value.
 
     Args:
-        dt: A datetime, list of datetimes, string, or None from whois output.
+        dt: A datetime, list of datetimes, or None from whois output.
 
     Returns:
         ISO-8601 date string or None.
     """
-    import dateutil.parser
-
     if isinstance(dt, list):
         dt = dt[0] if dt else None
-        
     if isinstance(dt, datetime):
         return dt.strftime("%Y-%m-%d")
-    elif isinstance(dt, str):
-        try:
-            parsed_dt = dateutil.parser.parse(dt)
-            return parsed_dt.strftime("%Y-%m-%d")
-        except Exception:
-            pass
-            
     return None
 
 
@@ -109,12 +99,6 @@ async def _whois_creation_date(domain: str) -> Optional[datetime]:
             creation = creation[0]
         if isinstance(creation, datetime):
             return creation
-        elif isinstance(creation, str):
-            import dateutil.parser
-            try:
-                return dateutil.parser.parse(creation)
-            except Exception:
-                pass
     except Exception as exc:
         logger.debug("WHOIS failed for %s: %s", domain, exc)
     return None
@@ -135,7 +119,7 @@ async def _rdap_creation_date(domain: str) -> Optional[datetime]:
     """
     url = f"https://rdap.org/domain/{domain}"
     try:
-        async with httpx.AsyncClient(timeout=RDAP_TIMEOUT, follow_redirects=True) as client:
+        async with httpx.AsyncClient(timeout=RDAP_TIMEOUT) as client:
             response = await client.get(url, headers={"User-Agent": "Cypher-Scanner/1.0"})
             if response.status_code != 200:
                 return None
