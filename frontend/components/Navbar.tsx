@@ -29,7 +29,7 @@ export function Navbar() {
             aria-label="Main navigation"
           >
             <Link
-              href="/"
+              href="/scanner"
               className="px-4 py-1.5 rounded-full font-medium text-text-primary hover:bg-accent/15 hover:text-accent transition-all"
             >
               Scanner

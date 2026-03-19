@@ -43,11 +43,9 @@ const NavBar: React.FC<NavBarProps> = () => {
             key={item}
             href={
               item === "HOME" ? "/" :
-              item === "SCANNER" ? (isLocal ? "https://url-phishing-ten.vercel.app/?view=scanner" : "/?view=scanner") : 
+              item === "SCANNER" ? "/scanner" : 
               `/${item.toLowerCase()}`
             }
-            target={item === "SCANNER" && isLocal ? "_blank" : undefined}
-            rel={item === "SCANNER" && isLocal ? "noopener noreferrer" : undefined}
             className={`text-sm font-medium px-4 py-2 rounded-lg transition-all duration-200 ${
               item === "HOME" ? "text-accent bg-surface2/50" : "text-muted hover:bg-surface2 hover:text-text"
             }`}

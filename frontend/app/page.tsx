@@ -13,47 +13,12 @@ import ReportSection from "@/components/landing/ReportSection";
 import FooterSection from "@/components/landing/FooterSection";
 
 export default function LandingPage() {
-  const [scannerOnly, setScannerOnly] = useState(false);
-  const [ready, setReady] = useState(false);
-
-  useEffect(() => {
-    const host = window.location.hostname;
-    const isLocal = host === "localhost" || host === "127.0.0.1";
-    const params = new URLSearchParams(window.location.search);
-    setScannerOnly(!isLocal && params.get("view") === "scanner");
-    setReady(true);
-  }, []);
-
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
   };
-
-  if (!ready) return null;
-
-  // ── Scanner-only mode (Vercel with ?view=scanner) ──
-  if (scannerOnly) {
-    return (
-      <motion.main
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.4 }}
-        className="relative flex flex-col w-full min-h-screen"
-      >
-        <NavBar />
-        <div className="pt-8">
-          <ScanSection />
-        </div>
-        <footer className="mt-auto py-10 text-center border-t border-white/5">
-          <p className="text-muted text-xs font-medium">
-            © {new Date().getFullYear()} Cypher Collective — Dedicated Scanner
-          </p>
-        </footer>
-      </motion.main>
-    );
-  }
 
   // ── Full landing page (default everywhere) ──
   return (
@@ -74,4 +39,5 @@ export default function LandingPage() {
     </motion.main>
   );
 }
+
 
