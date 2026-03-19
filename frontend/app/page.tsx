@@ -17,7 +17,8 @@ export default function LandingPage() {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      setIsVercel(window.location.hostname.includes("vercel.app"));
+      const host = window.location.hostname;
+      setIsVercel(host.includes("vercel") || host.includes("phishing-ten"));
     }
   }, []);
 
