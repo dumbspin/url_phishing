@@ -27,6 +27,7 @@ const NavBar: React.FC<NavBarProps> = () => {
           />
         </div>
         <span className="text-[17px] font-800 text-accent tracking-[2px] font-display">CYPHER</span>
+        <span className="text-[10px] text-muted/50 ml-2 font-mono">v1.0.5</span>
       </div>
 
       {/* RIGHT - Navigation Links */}
