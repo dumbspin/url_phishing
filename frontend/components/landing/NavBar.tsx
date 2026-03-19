@@ -36,7 +36,7 @@ const NavBar: React.FC<NavBarProps> = () => {
             key={item}
             href={
               item === "HOME" ? "/" : 
-              item === "SCANNER" ? "https://url-phishing-ten.vercel.app/" : 
+              item === "SCANNER" ? "https://url-phishing-ten.vercel.app/scanner" : 
               `/${item.toLowerCase()}`
             }
             target={item === "SCANNER" ? "_blank" : undefined}
