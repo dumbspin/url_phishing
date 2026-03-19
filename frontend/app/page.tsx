@@ -1,6 +1,5 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 
 // Components
@@ -14,17 +13,16 @@ import ReportSection from "@/components/landing/ReportSection";
 import FooterSection from "@/components/landing/FooterSection";
 
 export default function LandingPage() {
-  const searchParams = useSearchParams();
   const [scannerOnly, setScannerOnly] = useState(false);
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
     const host = window.location.hostname;
     const isLocal = host === "localhost" || host === "127.0.0.1";
-    // Show scanner-only on Vercel ONLY when ?view=scanner is set
-    setScannerOnly(!isLocal && searchParams.get("view") === "scanner");
+    const params = new URLSearchParams(window.location.search);
+    setScannerOnly(!isLocal && params.get("view") === "scanner");
     setReady(true);
-  }, [searchParams]);
+  }, []);
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -33,7 +31,6 @@ export default function LandingPage() {
     }
   };
 
-  // Blank screen until we know where we are (prevents flash of full page on Vercel)
   if (!ready) return null;
 
   // ── Scanner-only mode (Vercel with ?view=scanner) ──
@@ -77,3 +74,4 @@ export default function LandingPage() {
     </motion.main>
   );
 }
+
